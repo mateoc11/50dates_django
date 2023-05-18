@@ -1,0 +1,8 @@
+{% extends '../layout.html' %}
+{% block page-title %}50 Citas{% endblock %}
+{% block content %}
+    {% for photo in photo_data %}
+        <h2>{{ photo.title }}</h2>
+        <h2>{{ photo.imagepath }}</h2>
+    {% endfor %}
+{% endblock %}
