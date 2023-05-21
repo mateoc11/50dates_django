@@ -1,9 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Users,Photos
 from datetime import datetime
 from django.views.decorators.csrf import csrf_protect 
-from portals.forms.forms import photoForm
 from portals.functions.functions import handleUploadedPhoto
 from django.shortcuts import redirect
 
