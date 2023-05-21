@@ -17,6 +17,8 @@ def portals(request):
 def searchPhotos(request):
     password = request.POST['password']
     user_id = Users.objects.get(user_password=password).userid
+    if user_id == "":
+        return redirect('')
     return redirect('photos', userid=user_id)
 
 def redirectPhotos(request,userid):
