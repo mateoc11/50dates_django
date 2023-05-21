@@ -2,11 +2,17 @@
 {% block page-title %}Buscar{% endblock %}
 {% block content %}
   <br />
-  <div class="card mx-auto" style="width: 75%;">
-  <div class="card-header">
+  {% if error != '' %}
+    <div class="alert alert-danger mx-auto" role="alert" style="width: 75%;">
+      {{ error }}
+    </div>
+    <br>
+  {% endif %}
+  <div class="card mx-auto" style="width: 75%;border-color: #83502e;">
+  <div class="card-header text-white" style="background-color: #83502e;">
       Ingrese su contraseña
   </div>
-  <div class="card-body">
+  <div class="card-body" style="background-color: #d1b088;">
     <form action="search/" method="post">
       {% csrf_token %}  
         <div class="text-center">

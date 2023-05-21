@@ -13,7 +13,19 @@
             -moz-user-select: none;
             user-select: none;
         }
+        
+        .titlebg-color{
+            background-color: #83502e;
+        }
 
+        .lightbg-color{
+            background-color: #d2a56d;
+        }
+
+
+        .navbar-custom {
+            background-color: #83502e;
+        }
         body { 
             padding-top: 65px; 
         }
@@ -26,9 +38,9 @@
     <link rel="icon" type="image/png" href="{% static 'images/love.png' %}">
     <script src="https://kit.fontawesome.com/8ec07cbd02.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="lightbg-color">
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-custom navbar-expand-md navbar-dark fixed-top" >
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="{% static 'images/love.png' %}" alt="" width="30" height="30" class="d-inline-block align-text-top">
@@ -43,7 +55,7 @@
 
             {% endblock %}
         </div>
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
             <div class="col-md-4 d-flex align-items-center">
                 <span class="mb-3 mb-md-0 text-muted" style="margin-left: 10px">© 2023 Test Personal Project<br />
                 <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a></span>

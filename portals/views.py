@@ -8,15 +8,21 @@ from django.shortcuts import redirect
 def portals(request):
     return render(
         request,
-        'login/login.html'
+        'login/login.html',
+        {'error': ""}
     )
 
 @csrf_protect 
 def searchPhotos(request):
     password = request.POST['password']
-    user_id = Users.objects.get(user_password=password).userid
-    if user_id == "":
-        return redirect('')
+    try:
+        user_id = Users.objects.get(user_password=password).userid
+    except:
+        return render(
+        request,
+        'login/login.html',
+        {'error': "Contraseña Incorrecta"}
+        )
     return redirect('photos', userid=user_id)
 
 def redirectPhotos(request,userid):
