@@ -1,5 +1,6 @@
 {% extends '../layout.html' %}
 {% block page-title %}50 Citas{% endblock %}
+{% load static %}
 {% block content %}
     {% for photo in photo_data %}
        <br />
@@ -7,6 +8,7 @@
         <div class="row featurette">
             <div class="col-md-7">
                 <h1 class="text-center" style="font-size: 25pt; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans','Arial', 'sans-serif'; color: #ec5569;">{{photo.title}}</h1>
+                <br><br>
             </div>
             <div class="col-md-5">
                 {% if photo.imagepath == 'images/default.png' %}
@@ -14,17 +16,21 @@
                         <div class="card-body">
                                 <div class="text-center">
                                     <br /><br />
-                                    <input type="number" name="id" id="id" value="" hidden /><br />
+                                    <form action="photoUpload/" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %} 
+                                    <input type="number" name="id" id="id" value="{{photo.image_id}}" hidden /><br />
                                     <input type="text" name="userid" id="userid" value="{{photo.userid}}" hidden /><br />
+                                    <input type="file" id="myPhoto" name="pyPhoto">
                                     <input class="btn btn-success" type="submit" value="Subir Foto" />
                                     <br /><br /><br />
                                     <i class="fa-solid fa-heart-circle-plus fa-9x" style="color: #ec5569;"></i>
+                                    </form>
                                 </div>
                         </div>
                     </div>
                 {% else %}
                     <div class="mx-auto">
-                        <img src="" width="380" height="380" style="border: 5px solid #ec5569" />
+                        <img src="../../../static/{{photo.imagepath}}" width="380" height="380" style="border: 5px solid #ec5569" />
                     </div>
                 {% endif %}
             </div>
