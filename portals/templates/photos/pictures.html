@@ -3,39 +3,57 @@
 {% load static %}
 {% block content %}
     {% for photo in photo_data %}
-       <br />
+    <script>
+        function updateButton(id){
+            input = document.getElementById(`myPhoto${id}`)
+            if(input.files){
+                fileName = input.files.item(0).name.split('\\').pop();
+            }
+
+            document.getElementById(`button${id}`).innerHTML = "<i class='fa-solid fa-check'></i> "+fileName;
+        }
+    </script>
+    <div class="mx-auto">
         <hr>
-        <div class="row featurette">
-            <div class="col-md-7">
+        <div class="row" style="width: 100%;margin-left: 0.4%;">
+            <div class="col col-md-12">
                 <h1 class="text-center" style="font-size: 25pt; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: #83502e;">{{photo.title}}</h1>
-                <br><br>
             </div>
-            <div class="col-md-5">
+        </div>
+        <div class="row" style="width: 100%;margin-left: 0.4%;">
+            <div class="col col-md-12">
                 {% if photo.imagepath == 'images/default.png' %}
-                    <div class="card mx-auto" style="width: 380px; height: 380px; border-radius: 5px; justify-content: center; background-color: #cccfcd;outline: 15px solid #83502e;">
+                    <div class="card mx-auto" style="margin-top: 30px; margin-left: 15px;width: 300px; height: 300px; border-radius: 5px; background-color: #cccfcd;outline: 0px solid #83502e;">
                         <div class="card-body">
-                                <div class="text-center">
-                                    <br /><br />
-                                    <form action="photoUpload/" method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %} 
-                                    <input type="number" name="id" id="id" value="{{photo.image_id}}" hidden /><br />
-                                    <input type="text" name="userid" id="userid" value="{{photo.userid}}" hidden /><br />
-                                    <input type="file" id="myPhoto" name="pyPhoto">
-                                    <input class="btn btn-success" type="submit" value="Subir Foto" />
-                                    <br /><br /><br />
-                                    <i class="fa-solid fa-heart-circle-plus fa-9x" style="color: red;"></i>
-                                    </form>
-                                </div>
+                            <img src="{% static 'images/polaroid.png' %}" width="500px" height="560px" style="position: absolute;bottom: -170px;left: -110px;" >
+                            <div class="text-center" style="margin-top: -25px;" >
+                                <form action="photoUpload/" method="POST" enctype="multipart/form-data" style="position: absolute;left: 75px;">
+                                {% csrf_token %} 
+                                <input type="number" name="id" id="id" value="{{photo.image_id}}" hidden /><br />
+                                <input type="text" name="userid" id="userid" value="{{photo.userid}}" hidden /><br />
+                                <input type="file" id="myPhoto{{photo.image_id}}" name="myPhoto{{photo.image_id}}" class="inputfile" onchange="updateButton('{{photo.image_id}}');" hidden>
+                                <label class="btn btn-dark" for="myPhoto{{photo.image_id}}" id="button{{photo.image_id}}"><i class="fa-solid fa-image"></i>  Adjuntar Foto</label>
+                                <br><br>
+                                <input class="btn btn-success" type="submit" value="Subir" />
+                                <br /><br />
+                                <i class="fa-solid fa-heart-circle-plus fa-7x" style="color: red;"></i>
+                                </form>
+                            </div>
+                            
+                            
                         </div>
                     </div>
+                    <br><br><br><br>
                 {% else %}
                     <div class="mx-auto">
                         <img src="../../../static/{{photo.imagepath}}" width="380" height="380" style="border: 5px solid #ec5569" />
                     </div>
+                    <br><br><br><br>
                 {% endif %}
             </div>
         </div>
         <br />
         <br />
+    </div>
     {% endfor %}
 {% endblock %}

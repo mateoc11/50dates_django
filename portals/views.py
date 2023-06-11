@@ -41,7 +41,7 @@ def photoUpload(request):
     if request.method == 'POST':  
         image_id = request.POST['id']
         userid = request.POST['userid']
-        file_url = handleUploadedPhoto(request.FILES['pyPhoto']) 
+        file_url = handleUploadedPhoto(request.FILES[f'myPhoto{image_id}']) 
         photo = Photos.objects.get(userid=userid,image_id=image_id)
         photo.imagepath = file_url
         photo.save()
